@@ -1,32 +1,32 @@
-from gfxhat import lcd,  fonts, backlight
-from PIL import Image, ImageFont, ImageDraw
+from gfxhat import lcd, backlight
 
-h = 63
-w = 127
+
 backlight.set_all(255, 255, 200)
 backlight.show()
+lcd.clear()
+lcd.show()
 
-def lcd():
-    for a in range(h):
-        if y >= 0:
-            lcd.set_pixel(x,y-a,1)
-        else:
-            h = a
-    for b in range (0,w):
-        if x+b<=SW:
-            lcd.set_pixel(x+b,y-h,1)
-    else:
-         w = b
-    return (x+w,y-h)
+def clearScreen(lcd):
+    lcd.clear()
+    lcd.show()
 
-def displayObject(obj,x,y):
-    while x <=127 and y <= 63:
-        for x1 in range(x,x+w):
-            x = x+1
-        for y1 in range(y,y+h):
-            y = y+1
-    
+#a function displayObject
+def displayObject(obj,lcd,x,y):
+    b = x
+    for h in object:
+        for a in h:
+            lcd.set_pixel(x,y,a)
+            lcd.show()
+            x = x + 1
+            if x == 128:
+                x = 0
+        y = y + 1
+        if y == 64:
+            y = 0
+            x = b
 
+
+#Object to test
 f1 =  [
 [1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
@@ -38,4 +38,33 @@ f1 =  [
 [0,0,0,0,0,0,0,0]
 ]
 
-displayObject(f1,10,10)
+#Object to test
+pm = [[0,0,0,1,1,1,1,1,0,0,0],
+[0,0,1,1,1,1,1,1,1,0,0],
+[0,1,1,1,1,1,1,1,1,1,0],
+[1,1,1,1,1,1,1,1,0,0,0],
+[1,1,1,1,1,1,1,0,0,0,0],
+[1,1,1,1,1,1,0,0,0,0,0],
+[1,1,1,1,1,1,0,0,0,0,0],
+[1,1,1,1,1,1,1,0,0,0,0],
+[1,1,1,1,1,1,1,1,0,0,0],
+[0,1,1,1,1,1,1,1,1,1,0],
+[0,0,1,1,1,1,1,1,1,0,0],
+[0,0,0,1,1,1,1,1,0,0,0]
+]
+
+#a program that tests your displayObject function. The program prompts the user for the x,y coordinates, the object to display and displays it.
+x = int(input('Select where list or tuple will be displayed: '))
+while x > 127 or x < 0:
+    x = int(input('key a value between the range of 0 and 127 for x axis: '))
+
+y = int(input('Select where list or tuple will be displayed: '))
+while y > 63 or y < 0:
+    y = int(input('key a value between the range of 0 and 63 for y axis: '))
+
+#to call the function for first object
+clearScreen()
+displayObject(f1,lcd,x,y)
+#to call the function for first object
+clearScreen()
+displayObject(pm,lcd,x,y)
