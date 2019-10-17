@@ -11,9 +11,9 @@ def clearScreen(lcd):
     lcd.show()
 
 #a function displayObject
-def displayObject(obj,lcd,x,y):
+def displayObject(obj,x,y):
     b = x
-    for h in object:
+    for h in obj:
         for a in h:
             lcd.set_pixel(x,y,a)
             lcd.show()
@@ -54,17 +54,17 @@ pm = [[0,0,0,1,1,1,1,1,0,0,0],
 ]
 
 #a program that tests your displayObject function. The program prompts the user for the x,y coordinates, the object to display and displays it.
-x = int(input('Select where list or tuple will be displayed: '))
+x = int(input('Select where list or tuple will be displayed on x-axis: '))
 while x > 127 or x < 0:
     x = int(input('key a value between the range of 0 and 127 for x axis: '))
 
-y = int(input('Select where list or tuple will be displayed: '))
+y = int(input('Select where list or tuple will be displayed on y-axis: '))
 while y > 63 or y < 0:
     y = int(input('key a value between the range of 0 and 63 for y axis: '))
 
 #to call the function for first object
-clearScreen()
-displayObject(f1,lcd,x,y)
+clearScreen(lcd)
+displayObject(f1,x,y)
 #to call the function for first object
-clearScreen()
-displayObject(pm,lcd,x,y)
+clearScreen(lcd)
+displayObject(pm,x,y)
